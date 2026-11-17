@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body {
+            background: #f7f6fc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 520px;
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(50, 40, 90, 0.09);
+            border: 1px solid #ebe8f5;
+        }
+        .form-header {
+            background: #7554d8;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+        .form-header h1 {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        .form-header p {
+            font-size: 14px;
+            color: #eee9ff;
+        }
+        form {
+            padding: 28px 32px 32px;
+        }
+        .form-group {
+            margin-bottom: 17px;
+        }
+        label {
+            display: block;
+            color: #39334f;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #ddd8eb;
+            border-radius: 7px;
+            outline: none;
+            background: #fff;
+            color: #39334f;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #7554d8;
+            box-shadow: 0 0 0 3px rgba(117, 84, 216, 0.12);
+        }
+        input::placeholder {
+            color: #aaa4bb;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        button, .back-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button {
+            background: #7554d8;
+            color: white;
+        }
+        button:hover {
+            background: #6241c2;
+        }
+        .back-btn {
+            background: #eeeaf8;
+            color: #5c4b85;
+        }
+        .back-btn:hover {
+            background: #e1daf3;
+        }
+        button:active, .back-btn:active {
+            transform: scale(0.98);
+        }
+        @media (max-width: 480px) {
+            form {
+                padding: 22px 20px;
+            }
+            .form-header h1 {
+                font-size: 21px;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Update Student</h1>
+            <p>Edit {{std[1]}}'s Information</p>
+        </div>
+        <form action="/student/edit/{{std[0]}}" method="post">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name"
+                       placeholder="Enter student name"
+                       required value="{{std[1]}}">
+            </div>
+            <div class="form-group">
+                <label>Age (18-60)</label>
+                <input type="number" name="age"
+                       min="18" max="60"
+                       placeholder="Enter age"
+                       required value="{{std[2]}}">
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender" required>
+                    <option value="Male" {% if std[3] == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if std[3] == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if std[3] == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Marks (1-100)</label>
+                <input type="number" name="marks"
+                       min="1" max="100"
+                       placeholder="Enter marks"
+                       required value="{{std[4]}}">
+            </div>
+            <div class="form-group">
+                <label>Course</label>
+                <input type="text" name="course"
+                       placeholder="Enter course name"
+                       required value="{{std[5]}}">
+            </div>
+            <div class="form-group">
+                <label>Image URL</label>
+                <input type="url" name="image"
+                       placeholder="Paste student image URL"
+                       value="{{std[6]}}">
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status" required>
+                    <option value="1" {% if std[7] %}selected{% endif %}>Present</option>
+                    <option value="0" {% if not std[7] %}selected{% endif %}>Absent</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <a href="/" class="back-btn">Back</a>
+                <button type="submit">Update Student</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management System</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f6fc;
+            color: #29243b;
+        }
+
+        /* Header */
+
+        .header {
+            background: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eeeaf7;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            font-size: 26px;
+            color: #7554d8;
+        }
+
+        .logo h1 {
+            font-size: 21px;
+            color: #29243b;
+            font-weight: 700;
+        }
+
+        .add-btn {
+            background: #7554d8;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #6040bd;
+        }
+
+        /* Main */
+
+        .main {
+            width: 84%;
+            margin: 45px auto;
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .heading h2 {
+            font-size: 27px;
+            color: #29243b;
+        }
+        .heading p {
+            color: #89849b;
+            font-size: 14px;
+            margin-top: 7px;
+        }
+        /* Student Container */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 23px;
+            border: 1px solid #eeeaf7;
+            transition: 0.3s;
+        }
+        .card:hover {
+            border-color: #c9bafa;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(65, 45, 120, 0.07);
+        }
+        .card-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+        .card img {
+            width: 72px;
+            height: 72px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #eee9ff;
+        }
+        .student-name {
+            font-size: 17px;
+            color: #30264b;
+            margin-bottom: 6px;
+        }
+        .student-label {
+            font-size: 11px;
+            color: #9a91b0;
+        }
+        /* Details */
+        .details {
+            background: #faf9fe;
+            border-radius: 9px;
+            padding: 15px;
+        }
+        .details p {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #89849b;
+            margin-bottom: 13px;
+        }
+        .details p:last-child {
+            margin-bottom: 0;
+        }
+        .details span {
+            color: #3c3550;
+            font-weight: 600;
+        }
+        /* Buttons */
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 18px;
+        }
+        .actions a,
+        .actions button {
+            flex: 1;
+            padding: 9px 5px;
+            border: none;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+        .view-btn {
+            background: #f0edff;
+            color: #7554d8;
+        }
+        .view-btn:hover {
+            background: #e3dcff;
+        }
+        .update-btn {
+            background: #eaf8f1;
+            color: #26976b;
+        }
+        .update-btn:hover {
+            background: #d6f2e4;
+        }
+        .delete-btn {
+            background: #fff0f0;
+            color: #dc5555;
+        }
+        .delete-btn:hover {
+            background: #ffe0e0;
+        }
+        /* Empty State */
+        .empty {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: #89849b;
+        }
+        .empty i {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #aaa4b8;
+            font-size: 12px;
+        }
+        /* Responsive */
+        @media(max-width: 650px) {
+            .header {
+                padding: 18px 5%;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .logo h1 {
+                font-size: 17px;
+            }
+            .main {
+                width: 90%;
+                margin: 30px auto;
+            }
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .heading h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h1>Student Management</h1>
+        </div>
+        <a href="/add-student" class="add-btn">
+            <i class="fa-solid fa-plus"></i>
+            Add Student
+        </a>
+    </header>
+    <!-- Main Section -->
+    <main class="main">
+        <div class="heading">
+            <h2>Students Directory</h2>
+            <p>View and manage your student information.</p>
+        </div>
+        <!-- Student Cards -->
+        <div class="container">
+            {% for std in stds %}
+            <div class="card">
+                <div class="card-top">
+                    <img src="{{ std[6] }}" alt="Student Image">
+                    <div>
+                        <h3 class="student-name">
+                            {{ std[1] }}
+                        </h3>
+                        <p class="student-label">
+                            Student Profile
+                        </p>
+                    </div>
+                </div>
+                <div class="details">
+                    <p>
+                        <span>Age</span>
+                        {{ std[2] }}
+                    </p>
+                    <p>
+                        <span>Gender</span>
+                        {{ std[3] }}
+                    </p>
+                    <p>
+                        <span>Course</span>
+                        {{ std[5] }}
+                    </p>
+                </div>
+                <!-- Actions -->
+                <div class="actions">
+                    <a href="/students/{{ std[0] }}"
+                       class="view-btn">
+                        <i class="fa-solid fa-eye"></i>
+                        View
+                    </a>
+                    <a href="/student/edit/{{ std[0] }}"
+                       class="update-btn">
+                        <i class="fa-solid fa-pen"></i>
+                        Edit
+                    </a>
+                    <form action="/student/delete/{{ std[0] }}"
+                          method="post"
+                          style="flex:1;"
+                          onsubmit="return confirm('Are you sure you want to delete this student?');">
+                        <button type="submit" class="delete-btn">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="empty">
+                <i class="fa-solid fa-user-graduate"></i>
+                <h3>No Students Found</h3>
+                <p>Add your first student to get started.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+        © 2026 Student Management System | All Rights Reserved
+    </footer>
+
+</body>
+</html>
